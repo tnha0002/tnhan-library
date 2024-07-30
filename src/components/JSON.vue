@@ -108,12 +108,6 @@
     <section class="lab-section">
       <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
       <p>Highlighting Specific Authors:</p>
-
-      <!-- 
-      EXPLANATION
-      1. add css class for highlight
-      2. in the template (just below), use v-bind to bind highlight class to author named "George Orwell"
-      -->
       <ul>
         <li
           v-for="author in authors"

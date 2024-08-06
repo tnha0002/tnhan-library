@@ -1,41 +1,3 @@
-<!-- <template>
-  <div>
-    <h1>User Information Form / Credentials</h1>
-
-    <div class="form">
-      <form>
-        <label for="username">Username:</label><br />
-        <input type="text" id="username" name="username" /><br />
-
-        <label for="password">Password:</label><br />
-        <input type="password" id="password" name="password" /><br />
-
-        <label for="isAustralian">Australian Resident?</label><br />
-        <input type="checkbox" id="isAustralian" name="isAustralian" /><br />
-
-        <label for="reason">Reason for Joining:</label><br />
-        <textarea id="reason" name="reason" rows="3"></textarea><br />
-
-        <label for="gender">Gender</label><br />
-        <select id="gender">
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="other">Other</option>
-        </select>
-      </form>
-    </div>
-  </div>
-</template>
-
-<script setup>
-// Our logic will go here
-</script>
-
-<style scoped>
-/* Our logic will go here */
-</style> -->
-
-<!-- BOOTSTRAP SECTION -->
 <template>
   <div class="container mt-5">
     <div class="row">
@@ -79,23 +41,64 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="reason" class="form-label">Reason for Joining</label>
-            <textarea name="form-control" id="reason" rows="3" v-model="formData.reason"></textarea>
+            <label for="reason" class="form-label">Reason for joining</label>
+            <textarea
+              class="form-control"
+              id="reason"
+              rows="3"
+              v-model="formData.reason"
+            ></textarea>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
-            <button type="submit" class="btn btn-secondary" @click="clearForm">Clear</button>
+            <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5" v-if="submittedCards.length">
+    <div class="d-flex flex-wrap justify-content-start">
+      <div
+        v-for="(card, index) in submittedCards"
+        :key="index"
+        class="card m-2"
+        style="width: 18rem"
+      >
+        <div class="card-header">User Information</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Username: {{ card.username }}</li>
+          <li class="list-group-item">Password: {{ card.password }}</li>
+          <li class="list-group-item">
+            Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
+          </li>
+          <li class="list-group-item">Gender: {{ card.gender }}</li>
+          <li class="list-group-item">Reason: {{ card.reason }}</li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// Our logic will go here
+import { ref } from 'vue'
+
+const formData = ref({
+  username: '',
+  password: '',
+  isAustralian: false,
+  reason: '',
+  gender: ''
+})
+
+const submittedCards = ref([])
+
+const submitForm = () => {
+  submittedCards.value.push({
+    ...formData.value
+  })
+}
 </script>
 
-<style scoped>
-/* Our logic will go here */
-</style>
+<style></style>

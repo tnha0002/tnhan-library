@@ -5,12 +5,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:
-    import.meta.env.CF_PAGES === 'true'
-      ? '/'
-      : import.meta.env.GITHUB_ACTIONS === 'true'
-        ? '/tnhan-library/'
-        : '/',
+  base: import.meta.env.GITHUB_ACTIONS ? '/tnhan-library/' : '/',
   build: {
     outDir: 'dist'
   },
